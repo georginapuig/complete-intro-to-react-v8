@@ -7,6 +7,8 @@ export default function Results({ pets }) {
         <h1>No pets match</h1>
       ) : (
         pets.map((pet) => {
+          console.log(pet);
+
           return (
             <Pet
               animal={pet.animal}
