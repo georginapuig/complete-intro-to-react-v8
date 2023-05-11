@@ -14,7 +14,6 @@ const Details = () => {
     );
   }
 
-  console.log(results);
   const pet = results.data.pets[0];
 
   return (

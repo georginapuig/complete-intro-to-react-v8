@@ -1,32 +1,16 @@
-import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import fetchPet from "./fetchPet";
+const fetchBreedList = async ({ queryKey }) => {
+  const animal = queryKey[1];
+  if (!animal) return [];
 
-const Details = () => {
-  const { id } = useParams();
-  const results = useQuery(["details", id], fetchPet);
+  const apiRes = await fetch(
+    `http://pets-v2.dev-apis.com/breeds?animal=${animal}`
+  );
 
-  if (results.isLoading) {
-    return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
-      </div>
-    );
+  if (!apiRes.ok) {
+    throw new Error(`breeds/${animal} fetch not ok`);
   }
 
-  console.log(results);
-  const pet = results.data.pets[0];
-
-  return (
-    <div className="details">
-      <div>
-        <h1>{pet.name}</h1>
-        <h2>{`${pet.animal} — ${pet.breed} — ${pet.city}, ${pet.state}`}</h2>
-        <button>Adopt {pet.name}</button>
-        <p>{pet.description}</p>
-      </div>
-    </div>
-  );
+  return apiRes.json();
 };
 
-export default Details;
+export default fetchBreedList;
