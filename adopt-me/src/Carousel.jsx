@@ -9,6 +9,14 @@ export default class Carousel extends Component {
     images: ["http://pets-images.dev-apis.com/pets/none.jpg"],
   };
 
+  // add event listener
+  handleIndexClick = (event) => {
+    console.log(event);
+    this.setState({
+      active: +event.target.dataset.index,
+    });
+  };
+
   render() {
     const { active } = this.state;
     const { images } = this.props;
@@ -20,6 +28,8 @@ export default class Carousel extends Component {
           {images.map((photo, index) => (
             // eslint-disable-next-line
             <img
+              onClick={this.handleIndexClick}
+              data-index={index}
               key={photo}
               src={photo}
               className={index === active ? "active" : ""}
