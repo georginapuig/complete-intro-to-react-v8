@@ -12,6 +12,7 @@ const SearchParams = () => {
     location: "",
     animal: "",
     breed: "",
+    page: 0,
   });
   const [animal, setAnimal] = useState("");
   const [breeds] = useBreedList(animal);
@@ -19,7 +20,7 @@ const SearchParams = () => {
 
   const results = useQuery(["search", requestParams], fetchSearch);
   const pets = results?.data?.pets ?? [];
-
+  console.log(requestParams);
   return (
     <div className="search-params">
       <form
@@ -30,6 +31,7 @@ const SearchParams = () => {
             animal: formData.get("animal") ?? "",
             breed: formData.get("breed") ?? "",
             location: formData.get("location") ?? "",
+            page: 0,
           };
           setRequestParams(obj);
         }}
@@ -80,8 +82,24 @@ const SearchParams = () => {
         <button>Submit</button>
       </form>
       <Results pets={pets} />
+      <div>
+        <button
+          onClick={() =>
+            setRequestParams({ ...requestParams, page: requestParams.page - 1 })
+          }
+        >
+          prev
+        </button>
+        <button
+          onClick={() =>
+            setRequestParams({ ...requestParams, page: requestParams.page + 1 })
+          }
+        >
+          next
+        </button>
+      </div>
     </div>
   );
-};
+};;;
 
 export default SearchParams;
