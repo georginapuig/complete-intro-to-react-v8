@@ -20,7 +20,9 @@ const SearchParams = () => {
 
   const results = useQuery(["search", requestParams], fetchSearch);
   const pets = results?.data?.pets ?? [];
-  console.log(requestParams);
+
+  console.log(results?.data);
+
   return (
     <div className="search-params">
       <form
@@ -81,25 +83,35 @@ const SearchParams = () => {
 
         <button>Submit</button>
       </form>
-      <Results pets={pets} />
-      <div>
-        <button
-          onClick={() =>
-            setRequestParams({ ...requestParams, page: requestParams.page - 1 })
-          }
-        >
-          prev
-        </button>
-        <button
-          onClick={() =>
-            setRequestParams({ ...requestParams, page: requestParams.page + 1 })
-          }
-        >
-          next
-        </button>
+      <div className="results">
+        <Results pets={pets} />
+        <div className="pagination">
+          <button
+            onClick={() =>
+              setRequestParams({
+                ...requestParams,
+                page: requestParams.page - 1,
+              })
+            }
+            disabled={results?.data?.startIndex === 0}
+          >
+            prev
+          </button>
+          <button
+            onClick={() =>
+              setRequestParams({
+                ...requestParams,
+                page: requestParams.page + 1,
+              })
+            }
+            disabled={!results?.data?.hasNext}
+          >
+            next
+          </button>
+        </div>
       </div>
     </div>
   );
-};;;
+};
 
 export default SearchParams;
