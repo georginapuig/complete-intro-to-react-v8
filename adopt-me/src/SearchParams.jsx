@@ -4,6 +4,7 @@ import Results from "./Results";
 import useBreedList from "./useBreedList";
 import fetchSearch from "./fetchSearch";
 import AdoptedPetContext from "./AdoptedPetContext";
+import Paginate from "./Paginate";
 
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
@@ -83,32 +84,14 @@ const SearchParams = () => {
 
         <button>Submit</button>
       </form>
+
       <div className="results">
         <Results pets={pets} />
-        <div className="pagination">
-          <button
-            onClick={() =>
-              setRequestParams({
-                ...requestParams,
-                page: requestParams.page - 1,
-              })
-            }
-            disabled={results?.data?.startIndex === 0}
-          >
-            prev
-          </button>
-          <button
-            onClick={() =>
-              setRequestParams({
-                ...requestParams,
-                page: requestParams.page + 1,
-              })
-            }
-            disabled={!results?.data?.hasNext}
-          >
-            next
-          </button>
-        </div>
+        <Paginate
+          results={results}
+          requestParams={requestParams}
+          setRequestParams={setRequestParams}
+        />
       </div>
     </div>
   );
