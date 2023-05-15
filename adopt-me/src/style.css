@@ -261,6 +261,15 @@ header {
   margin-right: 15px;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination button {
+  margin: 0 1rem;
+}
+
 @media only screen and (max-width: 1129px) {
   header {
     display: flex;
@@ -289,15 +298,6 @@ header {
     width: 55%;
     float: left;
     margin-bottom: 25px;
-  }
-
-  .pagination {
-    display: flex;
-    justify-content: center;
-  }
-
-  .pagination button {
-    margin: 0 1rem;
   }
 
   .details {
