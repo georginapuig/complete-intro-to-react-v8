@@ -1,11 +1,12 @@
 import React from "react";
 
 export default function Paginate({ requestParams, setRequestParams, results }) {
-  const data = results?.data;
-  const pages = data?.numberOfResults / 10; // num of pages
-  let pagination;
+  const totalPets = results?.data?.numberOfResults;
+  const pageLimit = 10;
+  const totalPages = totalPets / pageLimit;
 
-  if (pages) pagination = [...Array(Math.ceil(pages)).keys()]; // arr with num of pages
+  let arrTotalPages;
+  if (totalPages) arrTotalPages = [...Array(Math.ceil(totalPages)).keys()]; // arr with num of pages
 
   return (
     <div className="pagination">
@@ -16,13 +17,13 @@ export default function Paginate({ requestParams, setRequestParams, results }) {
             page: requestParams.page - 1,
           })
         }
-        disabled={data?.startIndex === 0}
+        disabled={results?.data?.startIndex === 0}
       >
         prev
       </button>
 
-      {pagination
-        ? pagination.map((page) => {
+      {arrTotalPages
+        ? arrTotalPages.map((page) => {
             return (
               <button
                 id={page === requestParams.page ? "num-btn-active" : "num-btn"}
@@ -47,7 +48,7 @@ export default function Paginate({ requestParams, setRequestParams, results }) {
             page: requestParams.page + 1,
           })
         }
-        disabled={!data?.hasNext}
+        disabled={!results?.data?.hasNext}
       >
         next
       </button>
