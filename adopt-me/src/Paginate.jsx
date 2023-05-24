@@ -5,7 +5,7 @@ export default function Paginate({ requestParams, setRequestParams, results }) {
   const pages = data?.numberOfResults / (data?.endIndex - data?.startIndex); // num of pages
   let pagination;
 
-  if (pages) pagination = [...Array(Math.ceil(pages)).keys()]; // arr with num of pages
+  if (pages && data?.hasNext) pagination = [...Array(Math.ceil(pages)).keys()]; // arr with num of pages
 
   return (
     <div className="pagination">
@@ -23,9 +23,6 @@ export default function Paginate({ requestParams, setRequestParams, results }) {
 
       {pagination
         ? pagination.map((page) => {
-            console.log(page === requestParams.page);
-            console.log(page, requestParams.page);
-
             return (
               <button
                 id={page === requestParams.page ? "num-btn" : null}
