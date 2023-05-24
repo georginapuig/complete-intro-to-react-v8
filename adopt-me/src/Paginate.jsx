@@ -25,7 +25,7 @@ export default function Paginate({ requestParams, setRequestParams, results }) {
         ? pagination.map((page) => {
             return (
               <button
-                id={page === requestParams.page ? "num-btn" : null}
+                id={page === requestParams.page ? "num-btn-active" : "num-btn"}
                 key={page}
                 onClick={() =>
                   setRequestParams({

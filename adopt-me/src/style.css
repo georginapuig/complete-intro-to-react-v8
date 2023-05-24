@@ -212,7 +212,13 @@ header {
   text-decoration: none;
 }
 
-#num-btn {
+#num-btn,
+#num-btn-active {
+  padding: .75rem;
+  margin: 0 .5rem;
+}
+
+#num-btn-active {
   background-color: #122622;
 }
 
