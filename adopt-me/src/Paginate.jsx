@@ -2,10 +2,10 @@ import React from "react";
 
 export default function Paginate({ requestParams, setRequestParams, results }) {
   const data = results?.data;
-  const pages = data?.numberOfResults / (data?.endIndex - data?.startIndex); // num of pages
+  const pages = data?.numberOfResults / 10; // num of pages
   let pagination;
 
-  if (pages && data?.hasNext) pagination = [...Array(Math.ceil(pages)).keys()]; // arr with num of pages
+  if (pages) pagination = [...Array(Math.ceil(pages)).keys()]; // arr with num of pages
 
   return (
     <div className="pagination">
