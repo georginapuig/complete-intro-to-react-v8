@@ -212,6 +212,10 @@ header {
   text-decoration: none;
 }
 
+#num-btn {
+  background-color: #122622;
+}
+
 .search-params button:hover {
   background-color: #122622;
 }
